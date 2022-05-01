@@ -8777,8 +8777,8 @@ async function run() {
             owner: context.repo.owner,
             repo: context.repo.repo
         })
-        const { data: collaborator_data  }  = collaborators.data
-        core.info(`@${author} @${collaborator_data}`)      
+        const data  = parse(collaborators.data)
+        core.info(`@${author} @${data}`)      
     }
     catch (error) {
         core.setFailed(error.message)
