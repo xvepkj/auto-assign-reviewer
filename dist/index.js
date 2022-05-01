@@ -8776,7 +8776,7 @@ async function run() {
         const { data } = await octokit.request('GET /repos/{owner}/{repo}/collaborators', {
             owner: context.repo.owner,
             repo: context.repo.repo
-        })
+        });
         core.info(`@${author} @${data}`)      
     }
     catch (error) {
