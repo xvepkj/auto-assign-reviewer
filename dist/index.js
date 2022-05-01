@@ -8779,11 +8779,11 @@ async function run() {
         });
         var usernames = [];
         for(i = 0; i < collaborators.data.length; i++)
-            usernames.push(collaborators.data[i].login)
-        core.info(`@${author} @${usernames}`)      
+            usernames.push(collaborators.data[i].login);
+        core.info(`@${author} @${usernames}`);      
     }
     catch (error) {
-        core.setFailed(error.message)
+        core.setFailed(error.message);
     }
 }
 
