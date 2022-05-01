@@ -24,7 +24,7 @@ async function run() {
             }
         }
         core.info(`@${author} @${reviewer}`);     
-        await octokit.pulls.requestReviewers({
+        await octokit.rest.pulls.requestReviewers({
             owner: context.repo.owner,
             repo: context.repo.repo,
             pull_number: context.payload.pull_request.number,
