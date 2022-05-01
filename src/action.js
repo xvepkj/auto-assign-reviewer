@@ -16,7 +16,7 @@ async function run() {
             owner: context.repo.owner,
             repo: context.repo.repo
         })
-        core.info(`@${author} @${collaborators}`)      
+        core.info(`@${author} @${JSON.stringify(collaborators)}`)      
     }
     catch (error) {
         core.setFailed(error.message)
