@@ -8777,21 +8777,26 @@ async function run() {
             owner: context.repo.owner,
             repo: context.repo.repo
         });
-        var reviewer = ""
-        for(i = 0; i < collaborators.data.length; i++){
-            if(author != collaborators.data[i].login){
-                reviewer = collaborators.data[i].login;
-                break;
+        if(context.payload.pull_request.reviewers.length > 0){
+            core.info("Pull request already has a reviewer")
+        } else {
+            var reviewer = ""
+            for(i = 0; i < collaborators.data.length; i++){
+                if(author != collaborators.data[i].login){
+                    reviewer = collaborators.data[i].login;
+                    break;
+                }
             }
+            core.info(`@${author} @${reviewer}`);     
+            await octokit.rest.pulls.requestReviewers({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                pull_number: context.payload.pull_request.number,
+                reviewers: [reviewer],
+                team_reviewers: undefined
+              }) 
         }
-        core.info(`@${author} @${reviewer}`);     
-        await octokit.rest.pulls.requestReviewers({
-            owner: context.repo.owner,
-            repo: context.repo.repo,
-            pull_number: context.payload.pull_request.number,
-            reviewers: [reviewer],
-            team_reviewers: undefined
-          }) 
+    
     }
     catch (error) {
         core.setFailed(error.message);
