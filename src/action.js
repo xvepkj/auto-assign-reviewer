@@ -16,7 +16,7 @@ async function run() {
             owner: context.repo.owner,
             repo: context.repo.repo
         })
-        const { data : { login : usernames } } = collaborators
+        const { login : usernames } = collaborators
         core.info(`@${author} @${usernames}`)      
     }
     catch (error) {
