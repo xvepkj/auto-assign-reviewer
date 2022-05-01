@@ -8777,7 +8777,10 @@ async function run() {
             owner: context.repo.owner,
             repo: context.repo.repo
         });
-        core.info(`@${author} @${collaborators.data[0].login}`)      
+        var usernames = [];
+        for(i = 0; i < collaborators.length; i++)
+            usernames.push(collaborators[i].login)
+        core.info(`@${author} @${usernames}`)      
     }
     catch (error) {
         core.setFailed(error.message)
