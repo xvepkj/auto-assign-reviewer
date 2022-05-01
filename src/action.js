@@ -26,7 +26,7 @@ async function run() {
                     break;
                 }
             }
-            core.info(`@${author} @${reviewer}`);     
+            core.info(`Assigned @${reviewer} as reviewer`);     
             await octokit.rest.pulls.requestReviewers({
                 owner: context.repo.owner,
                 repo: context.repo.repo,
