@@ -11,12 +11,12 @@ async function run() {
             throw new Error("Can't get pull request payload");
         }
         const octokit = github.getOctokit(token);
-        const {assignees, number, user: { login: author }}  = context.payload.pull_request;
+        const {reviewers ,assignees, number, user: { login: author }}  = context.payload.pull_request;
         const collaborators = await octokit.request('GET /repos/{owner}/{repo}/collaborators', {
             owner: context.repo.owner,
             repo: context.repo.repo
         });
-        if(context.payload.pull_request.reviewers.length > 0){
+        if(reviewers.length > 0){
             core.info("Pull request already has a reviewer")
         } else {
             var reviewer = ""
