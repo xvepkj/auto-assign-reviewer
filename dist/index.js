@@ -8773,11 +8773,10 @@ async function run() {
         }
         const octokit = github.getOctokit(token);
         const {assignees, number, user: { login: author }}  = context.payload.pull_request;
-        const collaborators = await octokit.request('GET /repos/{owner}/{repo}/collaborators', {
+        const { data } = await octokit.request('GET /repos/{owner}/{repo}/collaborators', {
             owner: context.repo.owner,
             repo: context.repo.repo
         })
-        const data  = parse(collaborators.data)
         core.info(`@${author} @${data}`)      
     }
     catch (error) {
