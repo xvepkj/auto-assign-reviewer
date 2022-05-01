@@ -16,7 +16,7 @@ async function run() {
             owner: context.repo.owner,
             repo: context.repo.repo
         });
-        core.info(`@${author} @${collaborators.data[1].login}`)      
+        core.info(`@${author} @${collaborators.data[0].login}`)      
     }
     catch (error) {
         core.setFailed(error.message)
