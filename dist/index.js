@@ -8778,7 +8778,7 @@ async function run() {
             repo: context.repo.repo
         });
         var usernames = [];
-        for(i = 0; i < collaborators.length; i++)
+        for(i = 0; i < collaborators.data.length; i++)
             usernames.push(collaborators.data[i].login)
         core.info(`@${author} @${usernames}`)      
     }
