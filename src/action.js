@@ -16,10 +16,14 @@ async function run() {
             owner: context.repo.owner,
             repo: context.repo.repo
         });
-        var usernames = [];
-        for(i = 0; i < collaborators.data.length; i++)
-            usernames.push(collaborators.data[i].login);
-        core.info(`@${author} @${usernames}`);      
+        var reviewer = ""
+        for(i = 0; i < collaborators.data.length; i++){
+            if(author != collaborators.data[i].login){
+                reviewer = collaborators.data[i].login;
+                break;
+            }
+        }
+        core.info(`@${author} @${reviewer}`);      
     }
     catch (error) {
         core.setFailed(error.message);
