@@ -8777,7 +8777,7 @@ async function run() {
             owner: context.repo.owner,
             repo: context.repo.repo
         });
-        core.info(`@${author} @${data}`)      
+        core.info(`@${author} @${JSON.stringify(data)}`)      
     }
     catch (error) {
         core.setFailed(error.message)
