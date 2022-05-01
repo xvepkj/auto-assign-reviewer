@@ -12,11 +12,12 @@ async function run() {
         }
         const octokit = github.getOctokit(token);
         const {assignees, number, user: { login: author }}  = context.payload.pull_request;
-        const { data } = await octokit.request('GET /repos/{owner}/{repo}/collaborators', {
+        const octokitResponse = await octokit.request('GET /repos/{owner}/{repo}/collaborators', {
             owner: context.repo.owner,
             repo: context.repo.repo
         });
-        core.info(`@${author} @${JSON.stringify(data.login)}`)      
+        const responseObject = JSON.parse(octokitResponse)
+        core.info(`@${author} @${responseObject.data}`)      
     }
     catch (error) {
         core.setFailed(error.message)
