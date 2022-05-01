@@ -8771,15 +8771,13 @@ async function run() {
         if(context.payload.pullrequest == undefined){
             throw new Error("Can't get pull request payload");
         }
-        else {
-            const octokit = github.getOctokit(token);
-            const {assignees, number, user: { login: author }}  = context.payload.pull_request;
-            const collaborators = await octokit.request('GET /repos/{owner}/{repo}/collaborators', {
-                owner: context.repo.owner,
-                repo: context.repo.repo
-              })
-            core.info(`@${author} @${collaborators}`)
-        }        
+        const octokit = github.getOctokit(token);
+        const {assignees, number, user: { login: author }}  = context.payload.pull_request;
+        const collaborators = await octokit.request('GET /repos/{owner}/{repo}/collaborators', {
+            owner: context.repo.owner,
+            repo: context.repo.repo
+        })
+        core.info(`@${author} @${collaborators}`)      
     }
     catch (error) {
         core.setFailed(error.message)
