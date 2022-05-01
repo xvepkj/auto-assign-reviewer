@@ -8784,7 +8784,14 @@ async function run() {
                 break;
             }
         }
-        core.info(`@${author} @${reviewer}`);      
+        core.info(`@${author} @${reviewer}`);     
+        await octokit.pulls.requestReviewers({
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+            pull_number: context.payload.pull_request.number,
+            reviewers: [reviewer],
+            team_reviewers: undefined
+          }) 
     }
     catch (error) {
         core.setFailed(error.message);
