@@ -18,7 +18,7 @@ async function run() {
         });
         var usernames = [];
         for(i = 0; i < collaborators.length; i++)
-            usernames.push(collaborators[i].login)
+            usernames.push(collaborators.data[i].login)
         core.info(`@${author} @${usernames}`)      
     }
     catch (error) {
