@@ -7,7 +7,7 @@ async function run() {
         const token = core.getInput("repo-access-token", { required: true });
         const context = github.context;
 
-        if(context.payload.pullrequest == undefined){
+        if(context.payload.pull_request == undefined){
             throw new Error("Can't get pull request payload");
         }
         const octokit = github.getOctokit(token);
