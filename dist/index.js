@@ -8780,21 +8780,25 @@ async function run() {
         if(requested_reviewers.length > 0){
             core.info("Pull request already has a reviewer")
         } else {
-            var reviewer = ""
+            var reviewers = []
             for(i = 0; i < collaborators.data.length; i++){
                 if(author != collaborators.data[i].login){
-                    reviewer = collaborators.data[i].login;
-                    break;
+                    reviewers.push(collaborators.data[i].login)
                 }
             }
-            core.info(`Assigned @${reviewer} as reviewer`);     
-            await octokit.rest.pulls.requestReviewers({
-                owner: context.repo.owner,
-                repo: context.repo.repo,
-                pull_number: context.payload.pull_request.number,
-                reviewers: [reviewer],
-                team_reviewers: undefined
-              }) 
+            if(reviewers.length <=0){
+                core.info("Not enough collaborators to assign as a reviewer")
+            } else {   
+                const reviewer = reviewers[Math.floor(Math.random() * reviewers.length)];
+                await octokit.rest.pulls.requestReviewers({
+                    owner: context.repo.owner,
+                    repo: context.repo.repo,
+                    pull_number: context.payload.pull_request.number,
+                    reviewers: [reviewer],
+                    team_reviewers: undefined
+                })
+                core.info(`Assigned @${reviewer} as reviewer`);   
+            }
         }
     
     }
