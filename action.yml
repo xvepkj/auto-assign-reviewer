@@ -1,4 +1,4 @@
-name: 'Auto-assign-pr'
+name: 'Auto-assign-reviewer'
 description: 'Auto assign PR to the author' 
 
 inputs:
